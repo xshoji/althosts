@@ -12,7 +12,7 @@ builds:
     flags:
       - -trimpath
     ldflags:
-      - -s -X main.Version={{.Version}}
+      - -s -X cli.Version={{.Version}}
     # 1. Cross-compilation requires an explicit cross-compiler (e.g. aarch64-linux-gnu-gcc);
     #    Go's toolchain does not set one up automatically, so CGO_ENABLED=1 would silently
     #    produce a host-arch binary or fail outright.
