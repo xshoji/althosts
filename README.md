@@ -193,6 +193,38 @@ you interactively to elevate — everything else runs as your normal user.
 If you've enabled Touch ID for sudo (`/etc/pam.d/sudo_local`), the same
 biometric prompt is used.
 
+## Development
+
+### Build
+
+```bash
+go build -ldflags="-s" -trimpath -o althosts main.go
+```
+
+### Test
+
+```bash
+go test -v ./...
+```
+
+## Release
+
+The release flow for this repository is automated with GitHub Actions.
+Pushing Git tags triggers the release job.
+
+```
+# Release
+git tag v0.0.1 && git push --tags
+
+
+# Delete tag
+v="v0.0.1"; git tag -d "${v}" && git push origin :"${v}"
+
+# Delete tag and recreate new tag and push
+v="v0.0.1"; git tag -d "${v}" && git push origin :"${v}"; git tag "${v}"; git push --tags
+```
+
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
