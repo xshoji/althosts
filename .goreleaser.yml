@@ -45,7 +45,6 @@ homebrew_casks:
       owner: xshoji
       name: homebrew-tap
       token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
-    directory: Formula
     homepage: https://github.com/xshoji/althosts
     description: althosts is a small CLI that manages multiple local /etc/hosts profiles and switches between them on demand. Everything stays local — no remote sync, daemons, or GUI.
 changelog:
