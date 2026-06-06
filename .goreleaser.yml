@@ -1,0 +1,59 @@
+version: 2
+builds:
+  - main: cmd/althosts/main.go
+    binary: althosts
+    goos:
+      - windows
+      - darwin
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    flags:
+      - -trimpath
+    ldflags:
+      - -s
+    # 1. Cross-compilation requires an explicit cross-compiler (e.g. aarch64-linux-gnu-gcc);
+    #    Go's toolchain does not set one up automatically, so CGO_ENABLED=1 would silently
+    #    produce a host-arch binary or fail outright.
+    # 2. Even with a cross-compiler, the runtime's C code (linux_syscall.c) references
+    #    setresgid, which is absent in some cross-compilation sysroots and illegal as an
+    #    implicit declaration under C99.
+    # Disabling CGO also gives us a fully static binary with no libc dependency,
+    # which is exactly what we want for a scratch/distroless container image.
+    env:
+      - CGO_ENABLED=0
+archives:
+  - id: main
+    format: zip
+    name_template: >-
+      {{ .ProjectName }}_{{ .Version }}_
+      {{- if eq .Os "darwin" }}macOS
+      {{- else if eq .Os "linux" }}Linux
+      {{- else if eq .Os "windows" }}Windows
+      {{- else }}{{ .Os }}{{ end }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else }}{{ .Arch }}{{ end }}
+    files:
+      - README*
+      - LICENSE*
+snapshot:
+  name_template: "{{ .Tag }}-next-{{.ShortCommit}}"
+  version_template: "{{ .Tag }}-next"
+brews:
+  - name: althosts
+    repository:
+      owner: xshoji
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    directory: Formula
+    homepage: https://github.com/xshoji/althosts
+    description: `althosts` is a small CLI that manages multiple local `/etc/hosts` profiles and switches between them on demand. Everything stays local — no remote sync, daemons, or GUI.
+    install: |
+      bin.install "althosts"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
