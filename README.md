@@ -12,7 +12,7 @@ profiles can use the same biometric prompt as other sudo commands.
 ## Install
 
 ```bash
-brew install xshoji/tap/althosts
+brew install xshoji/tap/althosts --cask
 ```
 
 
