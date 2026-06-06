@@ -191,7 +191,11 @@ biometric prompt is used.
 ### Build
 
 ```bash
+# Go
 go build -ldflags="-s" -trimpath -o althosts main.go
+
+# Cross-compiling with GoReleaser
+goreleaser build --snapshot --clean
 ```
 
 ### Test

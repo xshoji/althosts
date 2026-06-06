@@ -25,7 +25,7 @@ builds:
       - CGO_ENABLED=0
 archives:
   - id: main
-    format: zip
+    formats: [zip]
     name_template: >-
       {{ .ProjectName }}_{{ .Version }}_
       {{- if eq .Os "darwin" }}macOS
@@ -38,9 +38,8 @@ archives:
       - README*
       - LICENSE*
 snapshot:
-  name_template: "{{ .Tag }}-next-{{.ShortCommit}}"
-  version_template: "{{ .Tag }}-next"
-brews:
+  version_template: "{{ .Tag }}-next-{{.ShortCommit}}"
+homebrew_casks:
   - name: althosts
     repository:
       owner: xshoji
@@ -49,8 +48,6 @@ brews:
     directory: Formula
     homepage: https://github.com/xshoji/althosts
     description: althosts is a small CLI that manages multiple local /etc/hosts profiles and switches between them on demand. Everything stays local — no remote sync, daemons, or GUI.
-    install: |
-      bin.install "althosts"
 changelog:
   sort: asc
   filters:
