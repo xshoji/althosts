@@ -207,14 +207,14 @@ Pushing Git tags triggers the release job.
 
 ```
 # Release
-git tag v0.0.1 && git push --tags
+git tag 0.0.1 && git push --tags
 
 
 # Delete tag
-v="v0.0.1"; git tag -d "${v}" && git push origin :"${v}"
+v="0.0.1"; git tag -d "${v}" && git push origin :"${v}"
 
 # Delete tag and recreate new tag and push
-v="v0.0.1"; git tag -d "${v}" && git push origin :"${v}"; git tag "${v}"; git push --tags
+v="0.0.1"; git tag -d "${v}" && git push origin :"${v}"; git tag "${v}"; git push --tags
 ```
 
 
