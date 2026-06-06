@@ -11,19 +11,10 @@ profiles can use the same biometric prompt as other sudo commands.
 
 ## Install
 
-Requires Go 1.26+.
-
 ```bash
-go install github.com/xshoji/althosts/cmd/althosts@latest
+brew install xshoji/tap/althosts
 ```
 
-Or build from source:
-
-```bash
-git clone https://github.com/xshoji/althosts.git
-cd althosts
-go build -o althosts ./cmd/althosts
-```
 
 ## Quick start
 
@@ -192,6 +183,8 @@ you interactively to elevate — everything else runs as your normal user.
 
 If you've enabled Touch ID for sudo (`/etc/pam.d/sudo_local`), the same
 biometric prompt is used.
+
+
 
 ## Development
 
