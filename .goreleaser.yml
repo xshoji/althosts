@@ -39,7 +39,7 @@ archives:
       - LICENSE*
 snapshot:
   version_template: "{{ .Tag }}-next-{{.ShortCommit}}"
-homebrew_casks:
+homebrew:
   - name: althosts
     repository:
       owner: xshoji
