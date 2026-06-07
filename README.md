@@ -40,27 +40,7 @@ a profile named `default`, so you can always switch back with
 ## Touch ID for sudo on macOS
 
 On supported macOS versions, you can enable Touch ID for `sudo` by creating
-`/etc/pam.d/sudo_local` from Apple's template and uncommenting the standard PAM
-line:
-
-```text
-auth       sufficient     pam_tid.so
-```
-
-This is the Apple-documented `sudo_local` mechanism, not a modification of the
-system `/etc/pam.d/sudo` file. Apple describes this in
-[What's new for enterprise in macOS Sonoma](https://support.apple.com/en-us/HT213893):
-
-> Touch ID can be allowed for `sudo` with a configuration that persists across
-> software updates using `/etc/pam.d/sudo_local`. See
-> `/etc/pam.d/sudo_local.template` for details.
-
-In other words, this is the normal local configuration Apple provides for
-`sudo`, not an althosts-specific setting. althosts does not write this file;
-once you enable Touch ID for sudo, `althosts use <name>` benefits from the
-same system-wide sudo behavior when it self-elevates.
-
-One way to apply Apple's template manually is:
+`/etc/pam.d/sudo_local` from Apple's template and uncommenting the standard PAM line.
 
 ```bash
 $ sudo cp /etc/pam.d/sudo_local.template /etc/pam.d/sudo_local
@@ -69,6 +49,13 @@ $ cat /etc/pam.d/sudo_local
 # Managed by althosts. Re-run `althosts touchid --disable` to remove.
 auth       sufficient     pam_tid.so
 ```
+
+This is the Apple-documented `sudo_local` mechanism. Apple describes this in
+[What's new for enterprise in macOS Sonoma](https://support.apple.com/en-us/HT213893):
+
+> Touch ID can be allowed for `sudo` with a configuration that persists across software updates using `/etc/pam.d/sudo_local`. See `/etc/pam.d/sudo_local.template` for details.
+
+
 
 ## Layout
 
