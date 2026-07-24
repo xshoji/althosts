@@ -20,7 +20,7 @@ brew install xshoji/tap/althosts --cask
 
 ```bash
 althosts init                       # create ~/.althosts and seed `default`
-althosts create dev                 # snapshot current /etc/hosts as "dev"
+althosts create dev                 # interactively choose a source, then create "dev"
 althosts edit dev                   # open in $EDITOR
 althosts validate dev
 althosts diff dev                   # diff against current /etc/hosts
@@ -115,7 +115,7 @@ the kind is detected automatically from the name.
 |---|---|
 | `init [--no-default]` | Create `~/.althosts` and seed a `default` profile from current `/etc/hosts` |
 | `list [--current] [--json]` | List profiles and combined definitions (active is marked `*`) |
-| `create <name> [--from-current\|--empty\|--from <name-or-path>]` | Create a plain profile. `--from` accepts an existing profile name or a local file path |
+| `create <name>` | Create a plain profile. Interactively prompts for the source: an existing profile/combined, the current `/etc/hosts`, or an empty profile |
 | `combine <name> <member> [<member>...]` | Create a combined profile from existing plain profile members |
 | `edit <name>` | Open profile or combined definition in `$EDITOR` (kind auto-detected, auto-applies if active) |
 | `show <name>` | Print the rendered hosts content (works for plain and combined) |
